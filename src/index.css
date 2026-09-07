@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
+@import "tailwindcss";
+
+/* ─── Design System Tokens ────────────────────────────────────────────── */
+@theme {
+  /* Dark-mode base (default) */
+  --color-bg:          #09090b;
+  --color-bg-subtle:   #0d0d10;
+  --color-surface:     #18181b;
+  --color-surface-2:   #1c1c20;
+  --color-surface-3:   #27272a;
+  --color-border:      #2e2e33;
+  --color-border-subtle: #252528;
+  --color-fg:          #fafafa;
+  --color-fg-muted:    #a1a1aa;
+  --color-fg-subtle:   #71717a;
+  --color-accent:      #6366f1;
+  --color-accent-hover:#4f46e5;
+  --color-accent-subtle:#6366f11a;
+  --color-success:     #22c55e;
+  --color-warning:     #f59e0b;
+  --color-danger:      #ef4444;
+  --color-info:        #38bdf8;
+
+  /* Semantic */
+  --color-ink:  #09090b;
+  --color-ink-2:#0d0d10;
+  --color-paper:#fafafa;
+  --color-paper-2:#a1a1aa;
+  --color-gold: #eab308;
+  --color-gold-2:#ca8a04;
+
+  --font-sans:   'Inter', system-ui, sans-serif;
+  --font-serif:  'Instrument Serif', Georgia, serif;
+}
+
+/* ─── Base ────────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #09090b;
+    color: #fafafa;
+  }
+
+  /* Light theme override */
+  [data-theme='light'] {
+    color-scheme: light;
+    --color-bg:           #fafafa;
+    --color-bg-subtle:    #f4f4f5;
+    --color-surface:      #ffffff;
+    --color-surface-2:    #f9f9fa;
+    --color-surface-3:    #f4f4f5;
+    --color-border:       #e4e4e7;
+    --color-border-subtle:#ebebed;
+    --color-fg:           #09090b;
+    --color-fg-muted:     #52525b;
+    --color-fg-subtle:    #71717a;
+    --color-accent:       #6366f1;
+    --color-accent-hover: #4f46e5;
+    --color-accent-subtle:#6366f11a;
+  }
+
+  [data-theme='light'] body {
+    background-color: #fafafa;
+    color: #09090b;
+  }
+}
+
+/* ─── Utility classes ─────────────────────────────────────────────────── */
+@layer utilities {
+  .font-serif { font-family: 'Instrument Serif', Georgia, serif; }
+
+  /* Theme-aware surface classes */
+  .gs-bg        { background-color: var(--color-bg); }
+  .gs-surface   { background-color: var(--color-surface); }
+  .gs-surface-2 { background-color: var(--color-surface-2); }
+  .gs-surface-3 { background-color: var(--color-surface-3); }
+  .gs-border    { border-color: var(--color-border); }
+  .gs-text      { color: var(--color-fg); }
+  .gs-text-muted{ color: var(--color-fg-muted); }
+  .gs-text-subtle{color: var(--color-fg-subtle); }
+  .gs-accent    { color: var(--color-accent); }
+  .gs-accent-bg { background-color: var(--color-accent-subtle); }
+
+  /* Sidebar nav active/inactive */
+  .gs-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: background 0.15s, color 0.15s;
+    color: var(--color-fg-muted);
+  }
+  .gs-nav-item:hover {
+    background-color: var(--color-surface-3);
+    color: var(--color-fg);
+  }
+  .gs-nav-item.active {
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent);
+  }
+
+  /* Card */
+  .gs-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+  }
+
+  /* Badge variants */
+  .gs-badge-blue    { background:#1e3a5f; color:#60a5fa; border:1px solid #1e40af44; }
+  .gs-badge-green   { background:#14352a; color:#4ade80; border:1px solid #16a34a44; }
+  .gs-badge-amber   { background:#3d2a0f; color:#fbbf24; border:1px solid #d9770644; }
+  .gs-badge-red     { background:#3d1012; color:#f87171; border:1px solid #dc262644; }
+  .gs-badge-purple  { background:#2d1b69; color:#a78bfa; border:1px solid #7c3aed44; }
+  .gs-badge-zinc    { background:#27272a; color:#a1a1aa; border:1px solid #3f3f4644; }
+
+  [data-theme='light'] .gs-badge-blue   { background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; }
+  [data-theme='light'] .gs-badge-green  { background:#f0fdf4; color:#16a34a; border:1px solid #bbf7d0; }
+  [data-theme='light'] .gs-badge-amber  { background:#fffbeb; color:#d97706; border:1px solid #fde68a; }
+  [data-theme='light'] .gs-badge-red    { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
+  [data-theme='light'] .gs-badge-purple { background:#f5f3ff; color:#7c3aed; border:1px solid #ddd6fe; }
+  [data-theme='light'] .gs-badge-zinc   { background:#f4f4f5; color:#52525b; border:1px solid #e4e4e7; }
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-surface-3); }
+
+::selection { background-color: rgba(99, 102, 241, 0.3); }
